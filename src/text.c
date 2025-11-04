@@ -611,7 +611,7 @@ void CopyGlyphToWindow(struct TextPrinter *textPrinter)
     if ((glyphHeight = (template->height * 8) - textPrinter->printerTemplate.currentY) > gCurGlyph.height)
         glyphHeight = gCurGlyph.height;
 
-    currX = textPrinter->printerTemplate.currentX;
+    currX = textPrinter->printerTemplate.currentX - gCurGlyph.width;
     currY = textPrinter->printerTemplate.currentY;
     glyphPixels = gCurGlyph.gfxBufferTop;
     windowTiles = window->tileData;
@@ -800,7 +800,7 @@ void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter)
             FillWindowPixelRect(
                 textPrinter->printerTemplate.windowId,
                 textPrinter->printerTemplate.bgColor << 4 | textPrinter->printerTemplate.bgColor,
-                textPrinter->printerTemplate.currentX,
+                textPrinter->printerTemplate.currentX - 9,
                 textPrinter->printerTemplate.currentY,
                 8,
                 16);
@@ -823,7 +823,7 @@ void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter)
                 sDownArrowYCoords[subStruct->downArrowYPosIdx],
                 8,
                 16,
-                textPrinter->printerTemplate.currentX,
+                textPrinter->printerTemplate.currentX - 8,
                 textPrinter->printerTemplate.currentY,
                 8,
                 16);
@@ -840,7 +840,7 @@ void TextPrinterClearDownArrow(struct TextPrinter *textPrinter)
     FillWindowPixelRect(
         textPrinter->printerTemplate.windowId,
         textPrinter->printerTemplate.bgColor << 4 | textPrinter->printerTemplate.bgColor,
-        textPrinter->printerTemplate.currentX,
+        textPrinter->printerTemplate.currentX - 9,
         textPrinter->printerTemplate.currentY,
         8,
         16);
@@ -1042,7 +1042,7 @@ static u16 RenderText(struct TextPrinter *textPrinter)
                 PlaySE(currChar);
                 return RENDER_REPEAT;
             case EXT_CTRL_CODE_SHIFT_RIGHT:
-                textPrinter->printerTemplate.currentX = textPrinter->printerTemplate.x + *textPrinter->printerTemplate.currentChar;
+                textPrinter->printerTemplate.currentX = textPrinter->printerTemplate.x - *textPrinter->printerTemplate.currentChar;
                 textPrinter->printerTemplate.currentChar++;
                 return RENDER_REPEAT;
             case EXT_CTRL_CODE_SHIFT_DOWN:
@@ -1161,7 +1161,7 @@ static u16 RenderText(struct TextPrinter *textPrinter)
             if (textPrinter->japanese)
                 textPrinter->printerTemplate.currentX += (gCurGlyph.width + textPrinter->printerTemplate.letterSpacing);
             else
-                textPrinter->printerTemplate.currentX += gCurGlyph.width;
+                textPrinter->printerTemplate.currentX -= gCurGlyph.width;
         }
         return RENDER_PRINT;
     case RENDER_STATE_WAIT:
