@@ -1,9 +1,9 @@
 gText_Birch_Welcome::
 	.string ""
-	.string "ﺳﻼم! ﺑﺒﺨﺸﯿﺪ دﯾﺮ ﮐﺮدم. \p"
-	.string "ﺍﺳﻢ ﻣﻦ ﺗﻮﺳﯽﻧﮋﺍدﻩ.\p"
-	.string "ﺍﻣﺎ ﻫﻤﻪ ﻣﻨﻮ ﺍﺳﺘﺎد ﭘﻮﮐﻤﻮﻥ\n"
-	.string "ﺻﺪﺍ ﻣﯽﮐﻨﻨﺪ.\p"
+	.string "سلام! ببخشید دیر کردم.\p"
+	.string "اسم من توسی‌نژاده.\p"
+	.string "اما همه منو استاد پوکمون\n"
+	.string "صدا می‌کنند.\p"
 	.string "$"
 
 gText_Birch_Pokemon::

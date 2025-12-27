@@ -25,6 +25,14 @@
 #include <string>
 #include "preproc.h"
 
+struct ParsedElement
+{
+    enum class Type { Codepoint, Sequence };
+    Type type;
+    std::int32_t codepoint;     // For single characters (Type::Codepoint)
+    std::string sequence;       // Pre-resolved byte sequence (Type::Sequence)
+};
+
 class StringParser
 {
 public:
@@ -45,7 +53,7 @@ private:
     Integer ReadInteger();
     Integer ReadDecimal();
     Integer ReadHex();
-    std::string ReadCharOrEscape();
+    ParsedElement ReadCharOrEscapeElement();
     std::string ReadBracketedConstants();
     void SkipWhitespace();
     void SkipRestOfInteger(int radix);
